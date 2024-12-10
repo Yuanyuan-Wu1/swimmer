@@ -1,0 +1,152 @@
+# Swimmer Training Management System Cursor Rules
+
+name: Swimmer Training Management System
+root: ./
+output: ./dist
+
+ignore:
+  - node_modules
+  - .git
+  - dist
+  - build
+  - .env
+  - "*.log"
+
+tasks:
+  - name: frontend
+    root: ./frontend
+    commands:
+      - npm install
+      - npm run build
+    watch:
+      - src/**/*
+
+  - name: backend
+    root: ./backend
+    commands:
+      - npm install
+      - npm run build
+    watch:
+      - src/**/*
+
+rules:
+  # 前端规则
+  - name: React Components
+    pattern: frontend/src/components/**/*.{tsx,jsx}
+    template: templates/component.tsx
+
+  - name: React Pages
+    pattern: frontend/src/pages/**/*.{tsx,jsx}
+    template: templates/page.tsx
+
+  - name: Frontend Tests
+    pattern: frontend/src/**/*.test.{ts,tsx}
+    template: templates/test.tsx
+
+  # 后端规则
+  - name: API Routes
+    pattern: backend/src/routes/**/*.ts
+    template: templates/route.ts
+
+  - name: Database Models
+    pattern: backend/src/models/**/*.ts
+    template: templates/model.ts
+
+  - name: Services
+    pattern: backend/src/services/**/*.ts
+    template: templates/service.ts
+
+  # 数据���迁移规则
+  - name: Database Migrations
+    pattern: backend/src/migrations/**/*.ts
+    template: templates/migration.ts
+
+  # 类型定义规则
+  - name: Type Definitions
+    pattern: shared/types/**/*.ts
+    template: templates/types.ts
+
+templates:
+  # 勋章系统相关模板
+  - name: Medal Component
+    path: templates/medal-component.tsx
+    description: "Template for medal display and management components"
+
+  # 赛事管理相关模板
+  - name: Event Management
+    path: templates/event-management.tsx
+    description: "Template for event management components"
+
+  # 数据分析相关模板
+  - name: Analytics Component
+    path: templates/analytics-component.tsx
+    description: "Template for data visualization and analysis components"
+
+lint:
+  eslint:
+    enabled: true
+    config: .eslintrc.js
+  prettier:
+    enabled: true
+    config: .prettierrc
+
+test:
+  jest:
+    enabled: true
+    config: jest.config.js
+
+dependencies:
+  frontend:
+    - react
+    - react-dom
+    - antd
+    - chart.js
+    - @apollo/client
+    - typescript
+
+  backend:
+    - express
+    - apollo-server-express
+    - typeorm
+    - postgresql
+    - jsonwebtoken
+    - openai
+
+  shared:
+    - typescript
+    - graphql
+
+environment:
+  node: ">=14.0.0"
+  npm: ">=6.0.0"
+
+deployment:
+  production:
+    branch: main
+    commands:
+      - npm run build
+      - npm run test
+      - npm run deploy
+
+  staging:
+    branch: develop
+    commands:
+      - npm run build
+      - npm run test
+
+security:
+  auth:
+    - jwt
+    - oauth2
+  
+  headers:
+    - content-security-policy
+    - x-frame-options
+    - x-xss-protection
+
+monitoring:
+  enabled: true
+  services:
+    - error-tracking
+    - performance-monitoring
+    - user-analytics 
