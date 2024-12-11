@@ -14,7 +14,7 @@ const authMiddleware = async (req, res, next) => {
     // 获取token
     const token = req.header('Authorization')?.replace('Bearer ', '');
     if (!token) {
-      throw new Error();
+      throw new Error('No token provided');
     }
 
     // 验证token

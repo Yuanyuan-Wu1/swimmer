@@ -161,3 +161,103 @@ npm run build
 cd backend
 npm start
 ```
+ 1. 安装 Xcode Command Line Tools
+xcode-select --install
+
+# 2. 安装 Homebrew (macOS包管理器)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# 3. 安装 Node.js
+brew install node
+
+# 4. 安装 MongoDB
+brew tap mongodb/brew
+brew install mongodb-community
+# 1. 克隆项目
+git clone https://github.com/Yuanyuan-Wu1/swimmer.git
+cd swimmer
+
+# 2. 安装后端依赖
+cd backend
+npm install
+
+# 3. 创建 .env 文件
+echo "MONGODB_URI=mongodb://localhost:27017/swimmer
+JWT_SECRET=your_secret_key
+PORT=5000" > .env
+
+# 4. 安装前端依赖
+cd ../frontend
+npm install
+
+# 1. 启动 MongoDB
+brew services start mongodb-community
+
+# 2. 启动后端服务器 (在 backend 目录下)
+cd ../backend
+npm run dev
+
+# 3. 启动前端开发服务器 (新开一个终端,在 frontend 目录下)
+cd ../frontend
+npm start
+
+# 1. 配置 Git
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+# 2. 添加修改
+git add .
+
+# 3. 提交修改
+git commit -m "Add nutrition and health reminder features"
+
+# 4. 推送到远程仓库
+git push origin master
+# 1. 创建新分支进行开发
+git checkout -b feature/nutrition-module
+
+# 2. 进行代码修改...
+
+# 3. 提交修改
+git add .
+git commit -m "Add nutrition tracking features"
+
+# 4. 推送分支
+git push origin feature/nutrition-module
+
+# 5. 在 GitHub 上创建 Pull Request
+# 后端开发
+cd backend
+npm run dev      # 启动开发服务器
+npm test        # 运行测试
+npm run lint    # 代码检查
+
+# 前端开发
+cd frontend
+npm start       # 启动开发服务器
+npm test        # 运行测试
+npm run build   # 构建生产版本
+
+# 检查MongoDB日志
+tail -f /usr/local/var/log/mongodb/mongo.log
+
+# 确保数据目录存在
+mkdir -p ~/data/db
+# 查看占用端口的进程
+lsof -i :5000
+lsof -i :3000
+
+# 终止进程
+kill -9 <PID>
+# 修复权限
+sudo chown -R `whoami` ~/.npm
+sudo chown -R `whoami` /usr/local/lib/node_modules
+# backend/.env
+echo "NODE_ENV=development
+MONGODB_URI=mongodb://localhost:27017/swimmer
+JWT_SECRET=1cvYzJYRWRkaWGfQp6E2eV9r6Mkf+DE22mBbesAoHzI=
+PORT=5000
+USE_MOCK_DATA=true" > .env
+
+# frontend/.env
+echo "REACT_APP_API_URL=http://localhost:5000/api" > frontend/.env

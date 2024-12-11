@@ -299,10 +299,13 @@ def export_analysis_results(athlete_df, best_times_df, trends_data, standards_df
     return output_dir
 
 def main():
-    # 设置文件路径
-    athlete_pdf = 'ZhuCharlotte.pdf'
-    standards_pdf = '2024champsstandards.pdf'
+    # 设置文件路径 - 使用相对路径
+    athlete_pdf = 'data/ZhuCharlotte.pdf'  # 修改路径
+    standards_pdf = 'data/2024champsstandards.pdf'  # 修改路径
     athlete_name = 'Charlotte Zhu'
+    
+    # 创建输出目录
+    os.makedirs('data/analysis', exist_ok=True)
     
     # 提取数据
     print("Extracting athlete's performance data...")

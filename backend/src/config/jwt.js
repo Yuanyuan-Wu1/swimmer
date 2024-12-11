@@ -1,27 +1,19 @@
-const mongoose = require('mongoose');
+// backend/src/config/jwt.js
+const jwt = require('jsonwebtoken');
 
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
-    
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-    
-    // 添加错误监听
-    mongoose.connection.on('error', err => {
-      console.error('MongoDB connection error:', err);
-    });
-
-    mongoose.connection.on('disconnected', () => {
-      console.log('MongoDB disconnected');
-    });
-
-  } catch (error) {
-    console.error(`Error: ${error.message}`);
-    process.exit(1);
-  }
+const generateToken = (userId) => {
+  return jwt.sign(
+    { userId }, 
+    process.env.JWT_SECRET,
+    { expiresIn: '24h' }
+  );
 };
 
-module.exports = connectDB;
+const verifyToken = (token) => {
+  return jwt.verify(token, process.env.JWT_SECRET);
+};
+
+module.exports = {
+  generateToken,
+  verifyToken
+};
